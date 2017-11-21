@@ -1,0 +1,89 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: "com.jfrog.bintray"
+
+def verName = '1.0.3'
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion "27.0.0"
+
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 27
+        versionCode 1
+        versionName "$verName"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.0.1'
+    implementation 'com.android.support:recyclerview-v7:27.0.1'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+}
+repositories {
+    mavenCentral()
+}
+
+group = 'com.shaizy.utilities' // Change this to match your package name
+version = "$verName" // Change this to match your version number
+
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
+
+task generateJavaDocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath()
+            .join(File.pathSeparator))
+}
+
+task generateJavaDocsJar(type: Jar) {
+    from generateJavaDocs.destinationDir
+    classifier 'javadoc'
+}
+
+generateJavaDocsJar.dependsOn generateJavaDocs
+
+bintray {
+    user = 'rc-shahnawaz'
+    key = 'ef75e56a863ded6ef3c7277205dbdb6075619bfa'
+    pkg {
+        repo = 'base-helper-classes'
+        name = 'com.shaizy.utilities'
+
+        version {
+            name = "$verName-dev"
+            desc = 'My test upload'
+            released = new Date()
+            vcsTag = "$verName"
+        }
+
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/rc-shahnawaz/CommonUtilities.git'
+        websiteUrl = 'https://github.com/rc-shahnawaz/CommonUtilities'
+    }
+    configurations = ['archives']
+}
+
+artifacts {
+    archives generateJavaDocsJar
+    archives generateSourcesJar
+}
