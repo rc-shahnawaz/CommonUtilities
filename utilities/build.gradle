@@ -76,7 +76,7 @@ bintray {
 
         version {
             name = "$verName-dev"
-            desc = 'My test upload'
+            desc = 'Base class helper for quick development'
             released = new Date()
             vcsTag = "$verName"
         }
