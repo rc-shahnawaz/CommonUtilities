@@ -62,9 +62,14 @@ task generateJavaDocsJar(type: Jar) {
 
 generateJavaDocsJar.dependsOn generateJavaDocs
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def binUser = properties.getProperty('bintray.user')
+def binApi = properties.getProperty('bintray.apikey')
+
 bintray {
-    user = 'rc-shahnawaz'
-    key = 'ef75e56a863ded6ef3c7277205dbdb6075619bfa'
+    user = binUser
+    key = binApi
     pkg {
         repo = 'base-helper-classes'
         name = 'com.shaizy.utilities'
