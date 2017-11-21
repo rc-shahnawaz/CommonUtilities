@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CommonUtilities.iml" filepath="$PROJECT_DIR$/CommonUtilities.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/CommonUtilities.iml" filepath="$PROJECT_DIR$/.idea/CommonUtilities.iml" />
+      <module fileurl="file://D:\Stuff\Shaizy\CommonUtilities\CommonUtilities.iml" filepath="D:\Stuff\Shaizy\CommonUtilities\CommonUtilities.iml" />
+      <module fileurl="file://D:\Stuff\Shaizy\CommonUtilities\app\app.iml" filepath="D:\Stuff\Shaizy\CommonUtilities\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/utilities/utilities.iml" filepath="$PROJECT_DIR$/utilities/utilities.iml" />
     </modules>
   </component>
 </project>
