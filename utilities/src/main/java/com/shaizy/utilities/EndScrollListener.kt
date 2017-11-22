@@ -10,17 +10,23 @@ import android.support.v7.widget.RecyclerView
  */
 
 class EndScrollListener(private val recyclerView: RecyclerView, private val refresh: () -> Unit) {
-    val scrollListener = object : RecyclerView.OnScrollListener() {
+    private val scrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
 
             if (recyclerView == null || recyclerView.layoutManager == null || recyclerView.adapter == null)
                 return
 
-            if (recyclerView.layoutManager.lastVisiblePosition() == recyclerView.adapter.itemCount - 1)
+            if (recyclerView.layoutManager.lastVisiblePosition() == recyclerView.adapter.itemCount - 1) {
                 refresh()
+            }
+
         }
     }
+
+    fun startListening() = recyclerView.addOnScrollListener(scrollListener)
+
+    fun stopListening() = recyclerView.removeOnScrollListener(scrollListener)
 
     init {
         recyclerView.addOnScrollListener(scrollListener)
